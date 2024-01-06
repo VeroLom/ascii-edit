@@ -1,0 +1,22 @@
+.table {
+    border-collapse: collapse;;
+    background: #000;
+}
+
+.row {
+    
+}
+
+.col {
+    width: 20px;
+    height: 10px;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+    font-size: 20px;
+    user-select: none;
+}
+
+.active {
+    background: #333;
+}

@@ -28,4 +28,5 @@ aside {
 section {
     flex-grow: 1;
     background: #000;
+    padding: 2rem;
 }
