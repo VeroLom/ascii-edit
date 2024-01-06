@@ -1,4 +1,4 @@
-import {COLORS} from "../constants/colors";
+import {COLORS} from "../constants";
 import styles from "./ColorSelector.module.css";
 import {useAppContext} from "../context";
 

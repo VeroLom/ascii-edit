@@ -1,19 +1,7 @@
 import {useEffect, useState} from "react";
 import styles from "./DrawingTable.module.css";
 import {useAppContext} from "../context";
-
-const initialTableData = [
-    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
-    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
-    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
-    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
-    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
-    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
-    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
-    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
-    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
-    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
-];
+import {initialTableData} from "../constants";
 
 function DrawingTable() {
     const {currentColor, tableData, setTableData } = useAppContext();
@@ -78,10 +66,12 @@ function DrawingTable() {
 
     const handleCellClick = (event, rowIndex, colIndex) => {
         if (event.ctrlKey) {
+            selectCell(rowIndex, colIndex);
+        } else {
+            selectCell(rowIndex, colIndex);
             setCellValue(rowIndex, colIndex);
         }
 
-        selectCell(rowIndex, colIndex);
     };
 
     useEffect(() => {
