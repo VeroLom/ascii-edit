@@ -1,5 +1,6 @@
 import './App.css';
 import DrawingTable from "./components/DrawingTable";
+import Sidebar from "./components/Sidebar";
 
 function App() {
     return (
@@ -10,9 +11,7 @@ function App() {
 
             <main>
 
-                <aside>
-                    [colors]
-                </aside>
+                <Sidebar />
 
                 <section>
                     <DrawingTable />

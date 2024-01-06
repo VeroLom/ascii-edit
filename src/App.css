@@ -19,12 +19,6 @@ main {
     flex-grow: 1;
 }
 
-aside {
-    flex: 0 0 20%;
-    max-width: 200px;
-    background: #666;
-}
-
 section {
     flex-grow: 1;
     background: #000;

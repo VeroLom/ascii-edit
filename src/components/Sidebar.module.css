@@ -1,0 +1,5 @@
+.aside {
+    flex: 0 0 20%;
+    max-width: 120px;
+    background: #666;
+}

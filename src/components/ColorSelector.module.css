@@ -1,0 +1,18 @@
+.colors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .5rem;
+    margin: .5rem 0;
+}
+
+.color {
+    flex: 0 0 40%;
+    height: 40px;
+    border: 1px solid #999;
+    cursor: pointer;
+}
+
+.active {
+    border-color: #fff;
+}

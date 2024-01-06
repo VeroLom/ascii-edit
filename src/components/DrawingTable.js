@@ -1,23 +1,23 @@
 import {useEffect, useState} from "react";
-import styles from "./DrawingTable.module.css"
+import styles from "./DrawingTable.module.css";
+import {useAppContext} from "../context";
 
+const initialTableData = [
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' ],
+];
 
 function DrawingTable() {
-    const initialTableData = [
-        ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-        ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-        ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-        ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-        ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-        ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-        ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-        ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-        ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-        ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-        ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' ],
-    ];
-
-    const [tableData, setTableData] = useState(initialTableData);
+    const {currentColor, setCurrentColor, tableData, setTableData } = useAppContext();
     const [selectedCell, setSelectedCell] = useState([0, 0]);
 
     const setCellValue = (row, col, char) => {
@@ -78,10 +78,15 @@ function DrawingTable() {
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
+
+        if(tableData.length === 0 || tableData[0].length === 0) {
+            setTableData(initialTableData);
+        }
+
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         }
-    }, [selectedCell, tableData]);
+    }, [selectedCell, tableData, setTableData]);
 
     return (
         <div>
