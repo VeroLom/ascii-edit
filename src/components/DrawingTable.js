@@ -3,26 +3,26 @@ import styles from "./DrawingTable.module.css";
 import {useAppContext} from "../context";
 
 const initialTableData = [
-    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' ],
-    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' ],
+    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
+    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
+    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
+    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
+    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
+    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
+    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
+    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
+    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
+    [['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X'], ['#ffffff', 'X']],
 ];
 
 function DrawingTable() {
-    const {currentColor, setCurrentColor, tableData, setTableData } = useAppContext();
+    const {currentColor, tableData, setTableData } = useAppContext();
     const [selectedCell, setSelectedCell] = useState([0, 0]);
 
-    const setCellValue = (row, col, char) => {
+    const setCellValue = (row, col, char = undefined) => {
+        char = char ? char : tableData[row][col][1];
         const newTableData = [...tableData];
-        newTableData[row][col] = char;
+        newTableData[row][col] = [currentColor, char];
         setTableData(newTableData);
     }
 
@@ -76,6 +76,14 @@ function DrawingTable() {
         }
     }
 
+    const handleCellClick = (event, rowIndex, colIndex) => {
+        if (event.ctrlKey) {
+            setCellValue(rowIndex, colIndex);
+        }
+
+        selectCell(rowIndex, colIndex);
+    };
+
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
 
@@ -98,9 +106,10 @@ function DrawingTable() {
                                 <td
                                     key={colIndex}
                                     className={`${styles.col} ${isSelected(rowIndex, colIndex) ? styles.active : ''}`}
-                                    onClick={() => selectCell(rowIndex, colIndex)}
+                                    onClick={(event) => handleCellClick(event, rowIndex, colIndex)}
+                                    style={{color: col[0]}}
                                 >
-                                    {col}
+                                    {col[1]}
                                 </td>
                             ))}
                         </tr>
