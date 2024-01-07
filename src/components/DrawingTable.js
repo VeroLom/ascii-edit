@@ -152,9 +152,7 @@ function DrawingTable() {
                         {row.map((col, colIndex) => (
                             <div
                                 key={colIndex}
-                                className={`${styles.col}
-                                    ${isSelected(rowIndex, colIndex) ? styles.active : ''}
-                                    ${isSaving ? styles.noborder : ''}`}
+                                className={`${styles.col} ${isSelected(rowIndex, colIndex) ? styles.active : ''}`}
                                 onClick={(event) => handleCellClick(event, rowIndex, colIndex)}
                                 style={{color: col[0]}}
                             >
