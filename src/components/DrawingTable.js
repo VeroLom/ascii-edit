@@ -100,25 +100,21 @@ function DrawingTable() {
     });
 
     return (
-        <div>
-            <table className={styles.table}>
-                <tbody>
-                    {tableData.map((row, rowIndex) => (
-                        <tr key={rowIndex} className={styles.row}>
-                            {row.map((col, colIndex) => (
-                                <td
-                                    key={colIndex}
-                                    className={`${styles.col} ${isSelected(rowIndex, colIndex) ? styles.active : ''}`}
-                                    onClick={(event) => handleCellClick(event, rowIndex, colIndex)}
-                                    style={{color: col[0]}}
-                                >
-                                    {col[1]}
-                                </td>
-                            ))}
-                        </tr>
+        <div className={styles.table}>
+            {tableData.map((row, rowIndex) => (
+                <div key={rowIndex} className={styles.row}>
+                    {row.map((col, colIndex) => (
+                        <div
+                            key={colIndex}
+                            className={`${styles.col} ${isSelected(rowIndex, colIndex) ? styles.active : ''}`}
+                            onClick={(event) => handleCellClick(event, rowIndex, colIndex)}
+                            style={{color: col[0]}}
+                        >
+                            {col[1]}
+                        </div>
                     ))}
-                </tbody>
-            </table>
+                </div>
+            ))}
         </div>
     );
 }
