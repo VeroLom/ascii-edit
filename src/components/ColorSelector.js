@@ -1,11 +1,9 @@
 import {COLORS} from "../constants";
 import styles from "./ColorSelector.module.css";
-import {useAppContext} from "../context";
+import useStore from "../store";
 
 const ColorSelector = () => {
-    const {currentColor, setCurrentColor} = useAppContext();
-
-
+    const {currentColor, setCurrentColor} = useStore();
 
     return (
         <div className={styles.colors}>

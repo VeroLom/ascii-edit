@@ -1,0 +1,13 @@
+.menu {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 4rem;
+    border-left: 2px solid #999;
+    padding-left: 4rem;
+}
+
+.menu input {
+    width: 4rem;
+}

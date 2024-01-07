@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import styles from "./DrawingTable.module.css";
-import {useAppContext} from "../context";
 import {initialTableData} from "../constants";
+import useStore from "../store";
 
 function DrawingTable() {
-    const {currentColor, tableData, setTableData } = useAppContext();
+    const {currentColor, tableData, setTableData } = useStore();
     const [selectedCell, setSelectedCell] = useState([0, 0]);
 
     const setCellValue = (row, col, char = undefined) => {
@@ -12,18 +12,17 @@ function DrawingTable() {
         const newTableData = [...tableData];
         newTableData[row][col] = [currentColor, char];
         setTableData(newTableData);
+        //setTableData([...tableData]);
     }
 
     const setSelectedCellValue = char => setCellValue(selectedCell[0], selectedCell[1], char);
 
-    const isSelected = (rowIndex, colIndex) =>
-        rowIndex === selectedCell[0] && colIndex === selectedCell[1];
-
+    const isSelected = (rowIndex, colIndex) => rowIndex === selectedCell[0] && colIndex === selectedCell[1];
     const selectCell = (rowIndex, colIndex) => setSelectedCell([rowIndex, colIndex]);
 
     const handleKeyDown = (event) => {
         const key = event.key;
-        console.log('* Key pressed:', key);
+        //console.log('* Key pressed:', key);
 
         switch (key) {
             case 'ArrowUp':
@@ -78,13 +77,13 @@ function DrawingTable() {
         window.addEventListener('keydown', handleKeyDown);
 
         if(tableData.length === 0 || tableData[0].length === 0) {
-            setTableData(initialTableData);
+            setTableData([...initialTableData]);
         }
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         }
-    }, [selectedCell, tableData, setTableData]);
+    });
 
     return (
         <div>
