@@ -1,7 +1,8 @@
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import styles from "./DrawingTable.module.css";
 import {initialTableData} from "../constants";
 import useStore from "../store";
+import html2canvas from "html2canvas";
 
 function DrawingTable() {
     const {
@@ -10,6 +11,23 @@ function DrawingTable() {
         selectedCell, setSelectedCell,
         insertMode, setInsertMode
     } = useStore();
+    const tableRef = useRef();
+
+    const saveToImage = () => {
+        if (!tableRef.current) return;
+
+        html2canvas(tableRef.current).then((canvas) => {
+            const imageUrl = canvas.toDataURL('image/png');
+
+            const downloadLink = document.createElement('a');
+            downloadLink.href = imageUrl;
+            downloadLink.download = 'ascii-image.png';
+
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        });
+    };
 
     const setCellValue = (row, col, char = undefined) => {
         char = char ? char : tableData[row][col][1];
@@ -92,8 +110,12 @@ function DrawingTable() {
             default:
                 if (key.length === 1) {
                     setSelectedCellValue(key);
-                    if (insertMode && selectedCell[1] < tableData[0].length - 1) {
-                        selectCell(selectedCell[0], selectedCell[1] + 1);
+                    if (insertMode) {
+                        if (selectedCell[1] < tableData[0].length - 1) {
+                            selectCell(selectedCell[0], selectedCell[1] + 1);
+                        } else {
+                            selectCell(selectedCell[0], 0);
+                        }
                     }
                 }
         }
@@ -122,21 +144,26 @@ function DrawingTable() {
     });
 
     return (
-        <div className={styles.table}>
-            {tableData.map((row, rowIndex) => (
-                <div key={rowIndex} className={styles.row}>
-                    {row.map((col, colIndex) => (
-                        <div
-                            key={colIndex}
-                            className={`${styles.col} ${isSelected(rowIndex, colIndex) ? styles.active : ''}`}
-                            onClick={(event) => handleCellClick(event, rowIndex, colIndex)}
-                            style={{color: col[0]}}
-                        >
-                            {col[1]}
-                        </div>
-                    ))}
-                </div>
-            ))}
+        <div>
+            <button onClick={() => saveToImage()}>SAVE</button>
+            <div className={styles.table} ref={tableRef}>
+                {tableData.map((row, rowIndex) => (
+                    <div key={rowIndex} className={styles.row}>
+                        {row.map((col, colIndex) => (
+                            <div
+                                key={colIndex}
+                                className={`${styles.col}
+                                    ${isSelected(rowIndex, colIndex) ? styles.active : ''}
+                                    ${isSaving ? styles.noborder : ''}`}
+                                onClick={(event) => handleCellClick(event, rowIndex, colIndex)}
+                                style={{color: col[0]}}
+                            >
+                                {col[1]}
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
