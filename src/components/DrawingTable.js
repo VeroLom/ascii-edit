@@ -8,6 +8,7 @@ function DrawingTable() {
         currentColor,
         tableData, setTableData,
         selectedCell, setSelectedCell,
+        insertMode, setInsertMode
     } = useStore();
 
     const setCellValue = (row, col, char = undefined) => {
@@ -70,9 +71,30 @@ function DrawingTable() {
             case 'PageDown':
                 selectCell(tableData.length - 1, selectedCell[1]);
                 break;
+            case 'Insert':
+                setInsertMode(!insertMode);
+                break;
+            case 'Enter':
+                if (selectedCell[0] < tableData.length - 1) {
+                    selectCell(selectedCell[0] + 1, selectedCell[1]);
+                } else {
+                    selectCell(0, selectedCell[1]);
+                }
+                break;
+            case 'Backspace':
+                if (selectedCell[1]) {
+                    selectCell(selectedCell[0], selectedCell[1] - 1);
+                } else {
+                    selectCell(selectedCell[0], tableData[0].length - 1);
+                }
+                setSelectedCellValue(' ');
+                break;
             default:
                 if (key.length === 1) {
                     setSelectedCellValue(key);
+                    if (insertMode && selectedCell[1] < tableData[0].length - 1) {
+                        selectCell(selectedCell[0], selectedCell[1] + 1);
+                    }
                 }
         }
     }

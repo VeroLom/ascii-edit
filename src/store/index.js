@@ -1,6 +1,9 @@
 import {create} from 'zustand';
 
 const useStore = create((set, get) => ({
+    insertMode: false,
+    setInsertMode: (newInsertMode) => set({ insertMode: newInsertMode }),
+
     currentColor: '#ffffff',
     setCurrentColor: (newCurrentColor) => set({ currentColor: newCurrentColor}),
 
