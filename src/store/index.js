@@ -4,6 +4,9 @@ const useStore = create((set, get) => ({
     insertMode: false,
     setInsertMode: (newInsertMode) => set({ insertMode: newInsertMode }),
 
+    showGrid: true,
+    setShowGrid: (newShowGrid) => set({ showGrid: newShowGrid }),
+
     currentColor: '#ffffff',
     setCurrentColor: (newCurrentColor) => set({ currentColor: newCurrentColor}),
 

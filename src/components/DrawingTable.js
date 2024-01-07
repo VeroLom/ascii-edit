@@ -9,7 +9,8 @@ function DrawingTable() {
         currentColor,
         tableData, setTableData,
         selectedCell, setSelectedCell,
-        insertMode, setInsertMode
+        insertMode, setInsertMode,
+        showGrid,
     } = useStore();
     const tableRef = useRef();
 
@@ -152,7 +153,7 @@ function DrawingTable() {
                         {row.map((col, colIndex) => (
                             <div
                                 key={colIndex}
-                                className={`${styles.col} ${isSelected(rowIndex, colIndex) ? styles.active : ''}`}
+                                className={`${styles.col} ${showGrid ? styles.border : ''} ${isSelected(rowIndex, colIndex) ? styles.active : ''}`}
                                 onClick={(event) => handleCellClick(event, rowIndex, colIndex)}
                                 style={{color: col[0]}}
                             >

@@ -18,10 +18,14 @@
     color: #fff;
     font-size: 20px;
     user-select: none;
-    border: 1px solid #111;
+    border: 1px solid transparent;
+}
+
+.border {
+    border-color: #111;
 }
 
 .active {
-    /*background: #333;*/
     border-color: #666;
 }
+

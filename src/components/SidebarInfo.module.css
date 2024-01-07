@@ -5,3 +5,12 @@
 .info p {
     color: #fff;
 }
+
+.toggle {
+    cursor: pointer;
+    color: red;
+}
+
+.on {
+    color: #00ff00;
+}
