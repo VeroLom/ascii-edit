@@ -1,11 +1,18 @@
 import {create} from 'zustand';
 
-const useStore = create((set) => ({
+const useStore = create((set, get) => ({
     currentColor: '#ffffff',
     setCurrentColor: (newCurrentColor) => set({ currentColor: newCurrentColor}),
-    tableData: [],
-    clearTableData: () => set({tableData: []}),
+
+    tableData: [[]],
     setTableData: (newTableData) => set({ tableData: [...newTableData] }),
+    getTableSize: () => {
+        const { tableData } = get();
+        return [tableData.length, tableData[0]?.length];
+    },
+
+    selectedCell: [0, 0],
+    setSelectedCell: (newSelectedCell) => set({ selectedCell: [...newSelectedCell]}),
 }));
 
 export default useStore;

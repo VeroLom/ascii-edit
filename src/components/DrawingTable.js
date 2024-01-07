@@ -1,18 +1,20 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import styles from "./DrawingTable.module.css";
 import {initialTableData} from "../constants";
 import useStore from "../store";
 
 function DrawingTable() {
-    const {currentColor, tableData, setTableData } = useStore();
-    const [selectedCell, setSelectedCell] = useState([0, 0]);
+    const {
+        currentColor,
+        tableData, setTableData,
+        selectedCell, setSelectedCell,
+    } = useStore();
 
     const setCellValue = (row, col, char = undefined) => {
         char = char ? char : tableData[row][col][1];
         const newTableData = [...tableData];
         newTableData[row][col] = [currentColor, char];
         setTableData(newTableData);
-        //setTableData([...tableData]);
     }
 
     const setSelectedCellValue = char => setCellValue(selectedCell[0], selectedCell[1], char);

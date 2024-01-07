@@ -3,7 +3,7 @@ import {useState} from "react";
 import styles from "./Menu.module.css";
 
 const Menu = () => {
-    const {setTableData} = useStore();
+    const {setTableData, setSelectedCell} = useStore();
     const [width, setWidth] = useState(10);
     const [height, setHeight] = useState(10);
 
@@ -20,6 +20,7 @@ const Menu = () => {
         }
 
         setTableData([...newTableData]);
+        setSelectedCell([0, 0]);
     }
 
     return (
