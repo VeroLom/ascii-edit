@@ -24,7 +24,7 @@ function DrawingTable() {
 
     const handleKeyDown = (event) => {
         const key = event.key;
-        //console.log('* Key pressed:', key);
+        console.log('* Key pressed:', key);
 
         switch (key) {
             case 'ArrowUp':
@@ -57,6 +57,18 @@ function DrawingTable() {
                 break;
             case 'Delete':
                 setSelectedCellValue(' ');
+                break;
+            case 'Home':
+                selectCell(selectedCell[0], 0);
+                break;
+            case 'End':
+                selectCell(selectedCell[0], tableData[0].length - 1);
+                break;
+            case 'PageUp':
+                selectCell(0, selectedCell[1]);
+                break;
+            case 'PageDown':
+                selectCell(tableData.length - 1, selectedCell[1]);
                 break;
             default:
                 if (key.length === 1) {
