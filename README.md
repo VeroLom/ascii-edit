@@ -1,3 +1,3 @@
 # ASCII Editor
 
-This project was made with [React](https://reactjs.org/).
+[Live demo](https://ascii-edit.vercel.app/)
